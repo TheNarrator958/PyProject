@@ -1,4 +1,5 @@
 import os
+from pickle import FALSE
 import random
 import sys
 
@@ -813,3 +814,186 @@ while moveOnEn2 == False:
 
     input()
 #endregion
+
+# Encounter 5 | Boss
+beginBattle = False
+
+while beginBattle == False:
+    os.system('cls')
+    print("As you approach the next room, you feel a deep rumble beneath your feet. The wind sends a chill down your spine.\nThis presence becomes disturbingly strong, and a sense of dread overcomes you.\nYou slowly open the door to the next room, and there stands a massive, hulking figure. Its eyes glow a deep red, and its form is shrouded in darkness.\nYou have encountered the final boss: Honorable Knight Richard of the Roundtable!\n")
+    print("Begin Battle? Y/N\n")
+
+    en5 = input()
+
+    if en5 == "Y":
+        print("The battle begins!")
+        beginBattle = True
+    if en5 == "N":
+        moveOnEn2 = False
+        while moveOnEn2 == False:
+            os.system('cls')
+    
+            print("SHOP")
+            print( "|-----------------Actions-----------------|")
+            print(f"| (h) increase max health - 17 gold       |")
+            print(f"|   (g) increase guard points - 14 gold   |")
+            print(f"| (a) increase attack power - 15 gold     |")
+            print(f"|  (p) buy potions (x1) - 6 gold          |")
+            print(f"|  (m) move onto next encounter           |")
+            print( "|-----------------Actions-----------------|")
+            print(f"{name} | HP: {health:.2f} / {maxHealth:.2f} | Shield: {shield:.2f} | Attack Power: {atkPwr:.2f} \n Potions Left: {potions} | Gold: {gold}\n")
+
+            shopEn1 = input()
+
+            # increase max health
+            if shopEn1 == "h":
+                increaseHealth = (maxHealth * 0.25) + random.randint(5, 10)
+                maxHealth += increaseHealth
+                gold -= 17
+                print(f"Your max health has been increased by {increaseHealth:.2f}")
+
+            # increase guard points/shield
+            if shopEn1 == "g":
+                increaseGuard = (shield * 0.25) + random.randint(4, 8)
+                shield += increaseGuard
+                gold -= 14
+                print(f"Your guard points has been increased by {increaseGuard:.2f}")
+
+            # increase attack power
+            if shopEn1 == "a":
+                increaseAttackPower = (atkPwr * 0.25) + random.randint(2, 6)
+                atkPwr += increaseAttackPower
+                gold -= 15
+                print(f"Your attack power has been increased by {increaseAttackPower:.2f}")
+
+            # buy potions
+            if shopEn1 == "p":
+                doublePotions = random.randint(1, 2)
+                gold -= 6
+
+                if doublePotions == 1:
+                    potions += 1
+                    print("You have bought 1 potion")
+                if doublePotions == 2:
+                    potions += 2
+                    print("Congrats! The shopkeeper decided to give you a 2nd potion for the price of 1!")
+
+            # move onto next encounter
+            if shopEn1 == "m":
+                moveOnEn2 = True
+
+            input()
+
+#region
+knightHealth = 200
+knightAtkPower = 15
+
+ranAwayFromKnight = False
+
+while knightHealth > 0:
+    if health > maxHealth:
+        health = maxHealth
+
+    if health <= 0:
+        os.system('cls')
+        print("You've died!")
+        input()
+        print("You have failed the journey and thus the experiment. You may close the game now.")
+        sys.exit()
+
+    os.system('cls')
+    print("- Encounter 4 of 5 -")
+    print(f"Honorable Knight Richard of the Roundtable | HP: {knightHealth:.2f} | Power: {knightAtkPower:.2f}")
+    print( "|-------Actions-------|")
+    print(f"| (a)ttack  |  (h)eal |")
+    print(f"|   (g)uard | (r)un   |")
+    print( "|-------Actions-------|")
+    print(f"{name} | HP: {health:.2f} / {maxHealth:.2f} | Potions Left: {potions}\n")
+
+    en1 = input()
+
+    # attack
+    if en1 == "a":
+        knightHealth -= atkPwr
+
+        if health < (maxHealth/2):
+            dmg = (knightAtkPower / 0.25)
+        if health >= (maxHealth / 1.25):
+            dmg = (knightAtkPower / 0.3)
+
+        a_rand = random.randint(1, 2)
+
+        if a_rand == 1:
+            dmg -= random.randint(1, 3)
+        if a_rand == 2:
+            dmg += random.randint(1, 3)
+
+        health -= dmg
+        print(f"You deal {atkPwr:.2f} damage! However, the Knight attacks back dealing {dmg:.2f} damage!")
+
+    # heal
+    if en1 == "h":
+        if potions <= 0:
+            potions = 0
+            print("You reach for a flask, however, you discover that you have run out!")
+        if potions > 0:
+            potions -= 1
+
+            if health < (maxHealth / 2):
+                regainHealth = (health * 0.25 + 5)
+            if health >= (maxHealth / 2):
+                regainHealth = (health * 0.25 + 2)
+
+            h_rand = random.randint(1, 2)
+
+            if h_rand == 1:
+                regainHealth -= random.randint(1, 2)
+            if h_rand == 2:
+                regainHealth += random.randint(1, 2)
+
+            health += regainHealth
+            print(f"You reach for a flask and pop open the cork. Taking a swig you regain {regainHealth:.2f}!")
+
+    # guard
+    if en1 == "g":
+        g_dmgCalc = knightAtkPower + (knightAtkPower * 2.5)
+        g_dmgCalc -= shield
+        
+        if g_dmgCalc < 0:
+            g_dmgCalc = random.randint(1, 3)
+
+        health -= g_dmgCalc
+
+        print(f"The knight reaches out, tackling you as hard as it can!\nThe knight deals {g_dmgCalc:.2f} damage!")
+
+    # run
+    if en1 == "r":
+        canRunAway = random.randint(1, 2)
+
+        if canRunAway == 1:
+            print("You ran away from the knight successfully! You move onto the next room.")
+            input()
+            ranAwayFromKnight = True
+            break
+        if canRunAway == 2:
+            print("You attempt to sprint past the knight into the next room, however, the knight slaps you back into the far wall and keeps you boxed in!")
+            
+            r_dmgCalc = knightAtkPower + (knightAtkPower * 2.5)
+            r_dmgCalc -= shield
+        
+            if r_dmgCalc < 0:
+                r_dmgCalc = random.randint(1, 3)
+
+            health -= r_dmgCalc
+            print(f"You take {r_dmgCalc:.2f} damage!")
+        
+    input()
+
+os.system('cls')
+
+if ranAwayFromKnight == False:
+    print(f"Congrats! You beat the knight!")
+    award = random.randint(30, 40)
+    gold += award
+    print(f"You are awarded {award} gold!")
+    input()
