@@ -183,7 +183,7 @@ while slimeHealth > 0:
                 regainHealth += random.randint(1, 2)
 
             health += regainHealth
-            print(f"You reach for a flask and pop open the cork. Taking a swig you regain {regainHealth}!")
+            print(f"You reach for a flask and pop open the cork. Taking a swig you regain {regainHealth:.2f}!")
 
     # guard
     if en1 == "g":
@@ -195,7 +195,7 @@ while slimeHealth > 0:
 
         health -= g_dmgCalc
 
-        print(f"The slime reaches out, tackling you as hard as it can!\nThe slime deals {g_dmgCalc} damage!")
+        print(f"The slime reaches out, tackling you as hard as it can!\nThe slime deals {g_dmgCalc:.2f} damage!")
 
     # run
     if en1 == "r":
@@ -216,7 +216,7 @@ while slimeHealth > 0:
                 r_dmgCalc = random.randint(1, 3)
 
             health -= r_dmgCalc
-            print(f"You take {r_dmgCalc} damage!")
+            print(f"You take {r_dmgCalc:.2f} damage!")
         
     input()
 
@@ -512,7 +512,7 @@ while zombieHealth > 0:
             dmg += random.randint(1, 3)
 
         health -= dmg
-        print(f"You deal {atkPwr} damage! However, the Zombie attacks back dealing {dmg:.2f} damage!")
+        print(f"You deal {atkPwr:.2f} damage! However, the Zombie attacks back dealing {dmg:.2f} damage!")
 
     # heal
     if en1 == "h":
@@ -535,7 +535,7 @@ while zombieHealth > 0:
                 regainHealth += random.randint(1, 2)
 
             health += regainHealth
-            print(f"You reach for a flask and pop open the cork. Taking a swig you regain {regainHealth}!")
+            print(f"You reach for a flask and pop open the cork. Taking a swig you regain {regainHealth:.2f}!")
 
     # guard
     if en1 == "g":
@@ -547,7 +547,7 @@ while zombieHealth > 0:
 
         health -= g_dmgCalc
 
-        print(f"The zombie reaches out, tackling you as hard as it can!\nThe zombie deals {g_dmgCalc} damage!")
+        print(f"The zombie reaches out, tackling you as hard as it can!\nThe zombie deals {g_dmgCalc:.2f} damage!")
 
     # run
     if en1 == "r":
@@ -568,7 +568,7 @@ while zombieHealth > 0:
                 r_dmgCalc = random.randint(1, 3)
 
             health -= r_dmgCalc
-            print(f"You take {r_dmgCalc} damage!")
+            print(f"You take {r_dmgCalc:.2f} damage!")
         
     input()
 
