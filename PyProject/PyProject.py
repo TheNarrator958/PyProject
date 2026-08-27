@@ -2,15 +2,19 @@ import os
 import random
 import sys
 
+#variables
+#region
 name = ""
-
 health = 25
 maxHealth = 0
 shield = 10
 atkPwr = 5
 potions = 5
 gold = 10
+#endregion
 
+#intro to game
+#region
 hasEnteredName = False
 
 while hasEnteredName == False:
@@ -106,7 +110,10 @@ if inA == "N":
 input()
 os.system('cls')
 
+#endregion
+
 #ENCOUNTER 1
+#region
 slimeHealth = 50
 slimeAtkPower = 3
 
@@ -142,7 +149,7 @@ while slimeHealth > 0:
 
         if health < (maxHealth/2):
             dmg = (slimeAtkPower / 0.25)
-        if health >= (maxHealth / 2):
+        if health >= (maxHealth / 1.25):
             dmg = (slimeAtkPower / 0.3)
 
         a_rand = random.randint(1, 2)
@@ -222,11 +229,13 @@ if ranAwayFromSlime == False:
     print(f"You are awarded {award} gold!")
     input()
 
-
 #SHOP BEFORE ENCOUNTER 2
 moveOnEn1 = False
 
 while moveOnEn1 == False:
+    if health > maxHealth:
+        health = maxHealth
+
     os.system('cls')
     
     print("SHOP")
@@ -237,7 +246,7 @@ while moveOnEn1 == False:
     print(f"|  (p) buy potions (x1) - 5 gold          |")
     print(f"|  (m) move onto next encounter           |")
     print( "|-----------------Actions-----------------|")
-    print(f"{name} | HP: {health:.2f} / {maxHealth} | Shield: {shield} | Attack Power: {atkPwr} \n Potions Left: {potions} | Gold: {gold}\n")
+    print(f"{name} | HP: {health:.2f} / {maxHealth:.2f} | Shield: {shield:.2f} | Attack Power: {atkPwr:.2f} \n Potions Left: {potions} | Gold: {gold}\n")
 
     shopEn1 = input()
 
@@ -245,6 +254,8 @@ while moveOnEn1 == False:
     if shopEn1 == "h":
         increaseHealth = (maxHealth * 0.25) + random.randint(5, 10)
         maxHealth += increaseHealth
+        health += (increaseHealth + 5)
+
         gold -= 12
         print(f"Your max health has been increased by {increaseHealth}")
 
@@ -279,3 +290,178 @@ while moveOnEn1 == False:
         moveOnEn1 = True
 
     input()
+#endregion
+
+#ENCOUNTER 2
+#region
+skeletonHealth = 75
+skeletonAtkPower = 6
+
+ranAwayFromSkeleton = False
+
+while skeletonHealth > 0:
+    if health > maxHealth:
+        health = maxHealth
+
+    if health <= 0:
+        os.system('cls')
+        print("You've died!")
+        input()
+        print("You have failed the journey and thus the experiment. You may close the game now.")
+        sys.exit()
+
+    os.system('cls')
+    print("- Encounter 2 of 5 -")
+    print(f"Skeleton | HP: {skeletonHealth} | Power: {skeletonAtkPower}")
+    print( "|-------Actions-------|")
+    print(f"| (a)ttack  |  (h)eal |")
+    print(f"|   (g)uard | (r)un   |")
+    print( "|-------Actions-------|")
+    print(f"{name} | HP: {health:.2f} / {maxHealth:.2f} | Potions Left: {potions}\n")
+
+    en1 = input()
+
+    # attack
+    if en1 == "a":
+        skeletonHealth -= atkPwr
+
+        if health < (maxHealth/2):
+            dmg = (skeletonAtkPower / 0.25)
+        if health >= (maxHealth / 1.25):
+            dmg = (skeletonAtkPower / 0.3)
+
+        a_rand = random.randint(1, 2)
+
+        if a_rand == 1:
+            dmg -= random.randint(1, 3)
+        if a_rand == 2:
+            dmg += random.randint(1, 3)
+
+        health -= dmg
+        print(f"You deal {atkPwr} damage! However, the Skeleton attacks back dealing {dmg:.2f} damage!")
+
+    # heal
+    if en1 == "h":
+        if potions <= 0:
+            potions = 0
+            print("You reach for a flask, however, you discover that you have run out!")
+        if potions > 0:
+            potions -= 1
+
+            if health < (maxHealth / 2):
+                regainHealth = (health * 0.25 + 5)
+            if health >= (maxHealth / 2):
+                regainHealth = (health * 0.25 + 2)
+
+            h_rand = random.randint(1, 2)
+
+            if h_rand == 1:
+                regainHealth -= random.randint(1, 2)
+            if h_rand == 2:
+                regainHealth += random.randint(1, 2)
+
+            health += regainHealth
+            print(f"You reach for a flask and pop open the cork. Taking a swig you regain {regainHealth}!")
+
+    # guard
+    if en1 == "g":
+        g_dmgCalc = skeletonAtkPower + (skeletonAtkPower * 2.5)
+        g_dmgCalc -= shield
+        
+        if g_dmgCalc < 0:
+            g_dmgCalc = random.randint(1, 3)
+
+        health -= g_dmgCalc
+
+        print(f"The skeleton reaches out, tackling you as hard as it can!\nThe skeleton deals {g_dmgCalc} damage!")
+
+    # run
+    if en1 == "r":
+        canRunAway = random.randint(1, 2)
+
+        if canRunAway == 1:
+            print("You ran away from the skeleton successfully! You move onto the next room.")
+            input()
+            ranAwayFromSkeleton = True
+            break
+        if canRunAway == 2:
+            print("You attempt to sprint past the skeleton into the next room, however, the skeleton slaps you back into the far wall and keeps you boxed in!")
+            
+            r_dmgCalc = skeletonAtkPower + (skeletonAtkPower * 2.5)
+            r_dmgCalc -= shield
+        
+            if r_dmgCalc < 0:
+                r_dmgCalc = random.randint(1, 3)
+
+            health -= r_dmgCalc
+            print(f"You take {r_dmgCalc} damage!")
+        
+    input()
+
+os.system('cls')
+
+if ranAwayFromSkeleton == False:
+    print(f"Congrats! You beat the skeleton!")
+    award = random.randint(5, 20)
+    gold += award
+    print(f"You are awarded {award} gold!")
+    input()
+
+
+#SHOP BEFORE ENCOUNTER 3
+moveOnEn2 = False
+
+while moveOnEn2 == False:
+    os.system('cls')
+    
+    print("SHOP")
+    print( "|-----------------Actions-----------------|")
+    print(f"| (h) increase max health - 14 gold       |")
+    print(f"|   (g) increase guard points - 12 gold   |")
+    print(f"| (a) increase attack power - 10 gold      |")
+    print(f"|  (p) buy potions (x1) - 6 gold          |")
+    print(f"|  (m) move onto next encounter           |")
+    print( "|-----------------Actions-----------------|")
+    print(f"{name} | HP: {health:.2f} / {maxHealth:.2f} | Shield: {shield:.2f} | Attack Power: {atkPwr:.2f} \n Potions Left: {potions} | Gold: {gold}\n")
+
+    shopEn1 = input()
+
+    # increase max health
+    if shopEn1 == "h":
+        increaseHealth = (maxHealth * 0.25) + random.randint(5, 10)
+        maxHealth += increaseHealth
+        gold -= 14
+        print(f"Your max health has been increased by {increaseHealth:.2f}")
+
+    # increase guard points/shield
+    if shopEn1 == "g":
+        increaseGuard = (shield * 0.25) + random.randint(4, 8)
+        shield += increaseGuard
+        gold -= 12
+        print(f"Your guard points has been increased by {increaseGuard:.2f}")
+
+    # increase attack power
+    if shopEn1 == "a":
+        increaseAttackPower = (atkPwr * 0.25) + random.randint(2, 6)
+        atkPwr += increaseAttackPower
+        gold -= 10
+        print(f"Your attack power has been increased by {increaseAttackPower:.2f}")
+
+    # buy potions
+    if shopEn1 == "p":
+        doublePotions = random.randint(1, 2)
+        gold -= 6
+
+        if doublePotions == 1:
+            potions += 1
+            print("You have bought 1 potion")
+        if doublePotions == 2:
+            potions += 2
+            print("Congrats! The shopkeeper decided to give you a 2nd potion for the price of 1!")
+
+    # move onto next encounter
+    if shopEn1 == "m":
+        moveOnEn2 = True
+
+    input()
+#endregion
