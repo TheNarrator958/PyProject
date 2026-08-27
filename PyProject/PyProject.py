@@ -51,31 +51,31 @@ os.system('cls')
 
 if classNumber == '1':
     print(f"Congrats {name}, you choose the Knight class!")
-    maxHealth = 35
+    maxHealth = 45
     shield = 30
     gold = 25
-    atkPwr = 10
+    atkPwr = 15
     
 if classNumber == '2':
     print(f"Congrats {name}, you choose the Alchemist class!")
-    maxHealth = 30
+    maxHealth = 40
     shield = 15
     gold = 15
-    atkPwr = 8
+    atkPwr = 13
 
 if classNumber == '3':
     print(f"Congrats {name}, you choose the Warrior class!")
-    maxHealth = 40
+    maxHealth = 50
     shield = 35
     gold = 20
-    atkPwr = 15
+    atkPwr = 20
     
 if classNumber == '4':
     print(f"Congrats {name}, you choose the Archer class!")
-    maxHealth = 30
+    maxHealth = 40
     shield = 10
     gold = 30
-    atkPwr = 15
+    atkPwr = 20
 
 input()
 
@@ -224,7 +224,7 @@ os.system('cls')
 
 if ranAwayFromSlime == False:
     print(f"Congrats! You beat the slime!")
-    award = random.randint(5, 20)
+    award = random.randint(20, 35)
     gold += award
     print(f"You are awarded {award} gold!")
     input()
