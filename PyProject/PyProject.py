@@ -134,7 +134,7 @@ while slimeHealth > 0:
 
     os.system('cls')
     print("- Encounter 1 of 5 -")
-    print(f"Slime | HP: {slimeHealth} | Power: {slimeAtkPower}")
+    print(f"Slime | HP: {slimeHealth:.2f} | Power: {slimeAtkPower}")
     print( "|-------Actions-------|")
     print(f"| (a)ttack  |  (h)eal |")
     print(f"|   (g)uard | (r)un   |")
@@ -312,7 +312,7 @@ while skeletonHealth > 0:
 
     os.system('cls')
     print("- Encounter 2 of 5 -")
-    print(f"Skeleton | HP: {skeletonHealth} | Power: {skeletonAtkPower}")
+    print(f"Skeleton | HP: {skeletonHealth:.2f} | Power: {skeletonAtkPower}")
     print( "|-------Actions-------|")
     print(f"| (a)ttack  |  (h)eal |")
     print(f"|   (g)uard | (r)un   |")
@@ -402,7 +402,7 @@ os.system('cls')
 
 if ranAwayFromSkeleton == False:
     print(f"Congrats! You beat the skeleton!")
-    award = random.randint(5, 20)
+    award = random.randint(30, 45)
     gold += award
     print(f"You are awarded {award} gold!")
     input()
