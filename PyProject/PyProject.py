@@ -3,6 +3,7 @@ from pickle import FALSE
 import random
 import sys
 from Encounter import encounter
+from colorama import Fore, Back, Style, init
 
 name = ""
 health = 25
@@ -11,6 +12,8 @@ shield = 10
 atkPwr = 5
 potions = 5
 gold = 10
+
+init(autoreset=True)
 
 class Player:
     def __init__(self, name, health, maxHealth, shield, atkPwr, potions, gold):
@@ -22,11 +25,10 @@ class Player:
         self.potions = potions
         self.gold = gold
 
-
 class encounters:
     def startEncounterE2S1():
-        golbin_encounter = encounter("Golbin", 75, 5, 30, 50, 2, 5)
-        golbin_encounter.start(player, encounters)
+        goblin_encounter = encounter("Goblin", 75, 5, 30, 50, 2, 5)
+        goblin_encounter.start(player, encounters)
     def startEncounterE3S1():
         skeleton_encounter = encounter("Skeleton", 100, 8, 50, 75, 3, 5)
         skeleton_encounter.start(player, encounters)
@@ -43,30 +45,30 @@ hasEnteredName = False
 
 while hasEnteredName == False:
     os.system('cls')
-    print("What is your name: ")
-    name = input()
+    print(Fore.GREEN + "What is your name: ")
+    name = input(Fore.CYAN)
 
     if name != '':
         hasEnteredName = True
 
-print("\nHello", name)
-print("Welcome to the PyProject Testing Environment")
-input()
+print(Fore.GREEN + "\nHello" + Fore.CYAN + f" {name}")
+print(Fore.GREEN + "Welcome to the PyProject Testing Environment")
+input(Fore.CYAN)
 
 hasChosenAClass = False
 
 while hasChosenAClass == False:
     os.system('cls')
 
-    print("Please, choose a class to embark on this journey:\n")
-    print("|========Class Selection========|")
-    print("| (1) Knight   |  (2) Alchemist |")
-    print("|  (3) Warrior | (4) Archer     |")
-    print("|-------------------------------|")
+    print(Fore.GREEN + "Please, choose a class to embark on this journey:\n")
+    print(Fore.LIGHTRED_EX + "|========Class Selection========|")
+    print(Fore.LIGHTRED_EX + "| (1) Knight   |  (2) Alchemist |")
+    print(Fore.LIGHTRED_EX + "|  (3) Warrior | (4) Archer     |")
+    print(Fore.LIGHTRED_EX + "|-------------------------------|")
 
     print()
 
-    classNumber = input()
+    classNumber = input(Fore.CYAN)
 
     if classNumber != '':
         hasChosenAClass = True
@@ -74,28 +76,28 @@ while hasChosenAClass == False:
 os.system('cls')
 
 if classNumber == '1':
-    print(f"Congrats {name}, you choose the Knight class!")
+    print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Knight class!")
     maxHealth = 45
     shield = 30
     gold = 25
     atkPwr = 15
     
 if classNumber == '2':
-    print(f"Congrats {name}, you choose the Alchemist class!")
+    print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Alchemist class!")
     maxHealth = 40
     shield = 15
     gold = 15
     atkPwr = 13
 
 if classNumber == '3':
-    print(f"Congrats {name}, you choose the Warrior class!")
+    print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Warrior class!")
     maxHealth = 50
     shield = 35
     gold = 20
     atkPwr = 20
     
 if classNumber == '4':
-    print(f"Congrats {name}, you choose the Archer class!")
+    print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Archer class!")
     maxHealth = 40
     shield = 10
     gold = 30
@@ -104,7 +106,7 @@ if classNumber == '4':
 input()
 
 os.system('cls')
-print("Your stats have been adjusted to the following:\n")
+print(Fore.GREEN + "Your stats have been adjusted to the following:\n")
 
 print("|===================|")
 print(f"| Health: {maxHealth}        |")
@@ -120,13 +122,13 @@ print("|===================|")
 input()
 
 os.system('cls')
-print(f"Your task is to clear the Python Dungeon.\nEnjoy {name}, and may luck be on your side!")
+print(Fore.GREEN + f"Your task is to clear the Python Dungeon.\nEnjoy" + Fore.CYAN + f" {name}" + Fore.GREEN + ", and may luck be on your side!")
 print("\nEmbark on your journey? Y/N\n")
 
-inA = input()
+inA = input(Fore.CYAN)
 
 if inA == "Y":
-    print("The journey begins")
+    print(Fore.GREEN + "The journey begins")
 
 if inA == "N":
     sys.exit()
