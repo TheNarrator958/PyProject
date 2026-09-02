@@ -70,40 +70,38 @@ while hasChosenAClass == False:
 
     classNumber = input(Fore.CYAN)
 
-    if classNumber != '':
+    os.system('cls')
+
+    if classNumber == '1':
+        print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Knight class!")
+        maxHealth = 45
+        shield = 30
+        gold = 25
+        atkPwr = 15
+        hasChosenAClass = True
+    elif classNumber == '2':
+        print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Alchemist class!")
+        maxHealth = 40
+        shield = 15
+        gold = 15
+        atkPwr = 13
+        hasChosenAClass = True
+    elif classNumber == '3':
+        print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Warrior class!")
+        maxHealth = 50
+        shield = 35
+        gold = 20
+        atkPwr = 20
+        hasChosenAClass = True
+    elif classNumber == '4':
+        print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Archer class!")
+        maxHealth = 40
+        shield = 10
+        gold = 30
+        atkPwr = 20
         hasChosenAClass = True
 
-os.system('cls')
-
-if classNumber == '1':
-    print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Knight class!")
-    maxHealth = 45
-    shield = 30
-    gold = 25
-    atkPwr = 15
-    
-if classNumber == '2':
-    print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Alchemist class!")
-    maxHealth = 40
-    shield = 15
-    gold = 15
-    atkPwr = 13
-
-if classNumber == '3':
-    print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Warrior class!")
-    maxHealth = 50
-    shield = 35
-    gold = 20
-    atkPwr = 20
-    
-if classNumber == '4':
-    print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Archer class!")
-    maxHealth = 40
-    shield = 10
-    gold = 30
-    atkPwr = 20
-
-input()
+    input()
 
 os.system('cls')
 print(Fore.GREEN + "Your stats have been adjusted to the following:\n")

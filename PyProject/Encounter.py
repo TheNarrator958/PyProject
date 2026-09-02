@@ -42,19 +42,19 @@ class encounter:
                 self.enemyHealth -= Player.atkPwr
 
                 if Player.health < (Player.maxHealth/2):
-                    dmg = (self.enemyAtkPower / 0.25)
+                    Player.dmg = (self.enemyAtkPower / 0.25)
                 if Player.health >= (Player.maxHealth / 1.25):
-                    dmg = (self.enemyAtkPower / 0.3)
+                    Player.dmg = (self.enemyAtkPower / 0.3)
 
                 a_rand = random.randint(1, 2)
 
                 if a_rand == 1:
-                    dmg -= random.randint(1, 3)
+                    Player.dmg -= random.randint(1, 3)
                 if a_rand == 2:
-                    dmg += random.randint(1, 3)
+                    Player.dmg += random.randint(1, 3)
 
-                Player.health -= dmg
-                print(Fore.GREEN + f"You deal {Player.atkPwr} damage! However, the {self.enemyName} attacks back dealing {dmg:.2f} damage!")
+                Player.health -= Player.dmg
+                print(Fore.GREEN + f"You deal {Player.atkPwr} damage! However, the {self.enemyName} attacks back dealing {Player.dmg:.2f} damage!")
 
             # heal
             if en1 == "h":
