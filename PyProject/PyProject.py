@@ -1,6 +1,7 @@
 import os
 from pickle import FALSE
 import random
+from re import A
 import sys
 from Encounter import encounter
 from colorama import Fore, Back, Style, init
@@ -14,6 +15,9 @@ potions = 5
 gold = 10
 
 init(autoreset=True)
+
+def consoleClear():
+    os.system("cls")
 
 class Player:
     def __init__(self, name, health, maxHealth, shield, atkPwr, potions, gold):
@@ -44,95 +48,64 @@ class encounters:
 hasEnteredName = False
 
 while hasEnteredName == False:
-    os.system('cls')
-    print(Fore.GREEN + "What is your name: ")
+    consoleClear()
+    print(Fore.GREEN + "Welcome to the Catacombs Dungeon\nA vicious dungeon that you have been trapped in!\nA person like you do not have any identity, nothing except your name.\n")
+
+    print(Fore.LIGHTGREEN_EX + "Do you remember your name? ", end='')
     name = input(Fore.CYAN)
 
-    if name != '':
+    print(Fore.GREEN + "\nHello" + Fore.CYAN + f" {name}" + Fore.GREEN + ". Did I read your name correctly? " + Fore.LIGHTRED_EX + "Y/N")
+    ans1 = input(Fore.CYAN)
+
+    if ans1 == "Y" or ans1 == "y":
         hasEnteredName = True
 
-print(Fore.GREEN + "\nHello" + Fore.CYAN + f" {name}")
-print(Fore.GREEN + "Welcome to the PyProject Testing Environment")
-input(Fore.CYAN)
+    if ans1 == "N" or ans1 == "n":
+        hasEnteredName = False
+        
+consoleClear()
+print(Fore.GREEN + "At least you remember your name, " + Fore.CYAN + f"{name}")
+input()
 
 hasChosenAClass = False
+withBagQ = False
 
 while hasChosenAClass == False:
-    os.system('cls')
+    consoleClear()
 
-    print(Fore.GREEN + "Please, choose a class to embark on this journey:\n")
-    print(Fore.LIGHTRED_EX + "|========Class Selection========|")
-    print(Fore.LIGHTRED_EX + "| (1) Knight   |  (2) Alchemist |")
-    print(Fore.LIGHTRED_EX + "|  (3) Warrior | (4) Archer     |")
-    print(Fore.LIGHTRED_EX + "|-------------------------------|")
+    print(Fore.GREEN + "Embarking on this journey requires supplies. If you wish to escape that is.\nThere is a bag in the corner of the room you're in, please, pick up the bag.")
+    print(Fore.GREEN + "Pick up the bag? " + Fore.LIGHTRED_EX + "Y/N")
 
-    print()
+    ans2 = input(Fore.CYAN)
 
-    classNumber = input(Fore.CYAN)
-
-    os.system('cls')
-
-    if classNumber == '1':
-        print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Knight class!")
-        maxHealth = 45
-        shield = 30
-        gold = 25
-        atkPwr = 15
+    if ans2 == "Y" or ans2 == "y":
         hasChosenAClass = True
-    elif classNumber == '2':
-        print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Alchemist class!")
-        maxHealth = 40
-        shield = 15
-        gold = 15
-        atkPwr = 13
+        withBagQ = True
+    if ans2 == "N" or ans2 == "n":
         hasChosenAClass = True
-    elif classNumber == '3':
-        print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Warrior class!")
-        maxHealth = 50
-        shield = 35
-        gold = 20
-        atkPwr = 20
-        hasChosenAClass = True
-    elif classNumber == '4':
-        print(Fore.GREEN + "Congrats" + Fore.CYAN + f" {name}" + Fore.GREEN + ", you choose the Archer class!")
-        maxHealth = 40
-        shield = 10
-        gold = 30
-        atkPwr = 20
-        hasChosenAClass = True
+        withBagQ = False
+    
+consoleClear()
 
+if withBagQ == True:
+    print(Fore.GREEN + "You picked up the bag, and inside it you found a few supplies.\nYou have been given " + Fore.CYAN + "five health potions, fifteen gold, and something special." + Fore.GREEN + "\nBehind the bag you found a sword made of stone, the edges sharp and the handle grippy.\nAdditionally, there is a small chestplate which you put on.")
+    potions = 5
+    gold = 15
+    atkPwr = 10
+    maxHealth = 50
+    shield = 15
     input()
-
-os.system('cls')
-print(Fore.GREEN + "Your stats have been adjusted to the following:\n")
-
-print("|===================|")
-print(f"| Health: {maxHealth}        |")
-print(f"| Shield: {shield}        |")
-if classNumber != '2':
-    print(f"| Attack Power: {atkPwr}  |")
-if classNumber == '2':
-    print(f"| Attack Power: {atkPwr}   |")
-print(f"| Gold: {gold}          |")
-print(f"| Potions: {potions}        |")
-print("|===================|")
+    consoleClear()
+    print(Fore.GREEN + "Prepared for your journey, you look around for the door.\nUpon finding it in the other corner of the room, you decide to throw the door wide open.\nOn the other side of the new room, stands a hulking enemy, bent on your destruction!")
+if withBagQ == False:
+    print(Fore.GREEN + "Yet another brave soul.\nYou throw open the door without hesitation and find yourself in a dark room with a powerful foe!")
+    potions = 0
+    gold = 0
+    atkPwr = 5
+    maxHealth = 50
+    shield = 0
 
 input()
-
-os.system('cls')
-print(Fore.GREEN + f"Your task is to clear the Python Dungeon.\nEnjoy" + Fore.CYAN + f" {name}" + Fore.GREEN + ", and may luck be on your side!")
-print("\nEmbark on your journey? Y/N\n")
-
-inA = input(Fore.CYAN)
-
-if inA == "Y":
-    print(Fore.GREEN + "The journey begins")
-
-if inA == "N":
-    sys.exit()
-
-input()
-os.system('cls')
 
 health = maxHealth
 player = Player(name, health, maxHealth, shield, atkPwr, potions, gold)
