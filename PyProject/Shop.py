@@ -3,7 +3,7 @@ import random
 from colorama import Fore, Back, Style, init
 
 class shop:
-    def __init__(self, Player, lastEncounter, encounters):
+    def __init__(self, Player, lastEncounter, encounters, floor):
         moveOnEn = False
 
         while moveOnEn == False:
@@ -61,11 +61,12 @@ class shop:
             input(Fore.CYAN)
 
         # move onto next encounter
-        if lastEncounter == 1:
-            encounters.startEncounterE2S1()
-        if lastEncounter == 2:
-            encounters.startEncounterE3S1()
-        if lastEncounter == 3:
-            encounters.startEncounterE4S1()
-        if lastEncounter == 4:
-            encounters.startEncounterE5S1()
+        if floor == 1:
+            if lastEncounter == 1:
+                encounters.startEncounterE2S1()
+            if lastEncounter == 2:
+                encounters.startEncounterE3S1()
+            if lastEncounter == 3:
+                encounters.startEncounterE4S1()
+            if lastEncounter == 4:
+                encounters.startEncounterE5S1()

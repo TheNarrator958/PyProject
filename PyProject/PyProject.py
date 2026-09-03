@@ -14,6 +14,8 @@ atkPwr = 5
 potions = 5
 gold = 10
 
+floor = 1
+
 init(autoreset=True)
 
 def consoleClear():
@@ -32,16 +34,16 @@ class Player:
 class encounters:
     def startEncounterE2S1():
         goblin_encounter = encounter("Goblin", 75, 5, 30, 50, 2, 5)
-        goblin_encounter.start(player, encounters)
+        goblin_encounter.start(player, encounters, floor)
     def startEncounterE3S1():
         skeleton_encounter = encounter("Skeleton", 100, 8, 50, 75, 3, 5)
-        skeleton_encounter.start(player, encounters)
+        skeleton_encounter.start(player, encounters, floor)
     def startEncounterE4S1():
         zombie_encounter = encounter("Zombie", 125, 10, 75, 100, 4, 5)
-        zombie_encounter.start(player, encounters)
+        zombie_encounter.start(player, encounters, floor)
     def startEncounterE5S1():
         dragon_encounter = encounter("Dragon", 150, 15, 100, 150, 5, 5)
-        dragon_encounter.start(player, encounters)
+        dragon_encounter.start(player, encounters, floor)
 
 #intro to game
 #region
@@ -110,6 +112,6 @@ input()
 health = maxHealth
 player = Player(name, health, maxHealth, shield, atkPwr, potions, gold)
 slime_encounter = encounter("Slime", 50, 3, 20, 30, 1, 5)
-slime_encounter.start(player, encounters)
+slime_encounter.start(player, encounters, floor)
 
 #endregion

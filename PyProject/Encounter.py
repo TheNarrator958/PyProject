@@ -14,7 +14,7 @@ class encounter:
         self.encounterNum = encounterNum
         self.encounterNumMax = encounterNumMax
 
-    def start(self, Player, encounters):
+    def start(self, Player, encounters, floor):
         ranAwayFromEnemy = False
         while self.enemyHealth > 0:
             if Player.health > Player.maxHealth:
@@ -121,6 +121,6 @@ class encounter:
             Player.gold += award
             print(Fore.GREEN + f"You are awarded {award} gold!")
             input(Fore.CYAN)
-            shop(Player, self.encounterNum, encounters)
+            shop(Player, self.encounterNum, encounters, floor)
     
-        shop(Player, self.encounterNum, encounters)
+        shop(Player, self.encounterNum, encounters, floor)
